@@ -37,7 +37,7 @@
             this.comboBoxPorts = new System.Windows.Forms.ComboBox();
             this.Con_btn = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.richTextBoxRead = new System.Windows.Forms.RichTextBox();
             this.button18 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -77,7 +77,11 @@
             this.Chw_Otw = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBoxRead = new System.Windows.Forms.RichTextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBoxProgram = new System.Windows.Forms.RichTextBox();
+            this.uploadButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -91,6 +95,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -143,7 +148,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Zapisz";
+            this.saveButton.Text = "Save Config";
             this.saveButton.UseVisualStyleBackColor = true;
             // 
             // Disc_btn
@@ -193,7 +198,6 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.richTextBoxRead);
-            this.tabPage4.Controls.Add(this.textBox3);
             this.tabPage4.Controls.Add(this.button18);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -203,12 +207,14 @@
             this.tabPage4.Text = "Read";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // richTextBoxRead
             // 
-            this.textBox3.Location = new System.Drawing.Point(108, 28);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(147, 20);
-            this.textBox3.TabIndex = 1;
+            this.richTextBoxRead.Location = new System.Drawing.Point(17, 103);
+            this.richTextBoxRead.Name = "richTextBoxRead";
+            this.richTextBoxRead.Size = new System.Drawing.Size(267, 157);
+            this.richTextBoxRead.TabIndex = 2;
+            this.richTextBoxRead.Text = "";
+            this.richTextBoxRead.TextChanged += new System.EventHandler(this.richTextBoxRead_TextChanged);
             // 
             // button18
             // 
@@ -223,6 +229,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -293,7 +300,7 @@
             this.Osz.Name = "Osz";
             this.Osz.Size = new System.Drawing.Size(100, 20);
             this.Osz.TabIndex = 34;
-            this.Osz.Text = "Os Z";
+            this.Osz.Text = "Z";
             // 
             // Osy
             // 
@@ -301,7 +308,7 @@
             this.Osy.Name = "Osy";
             this.Osy.Size = new System.Drawing.Size(100, 20);
             this.Osy.TabIndex = 33;
-            this.Osy.Text = "Os Y";
+            this.Osy.Text = "Y";
             // 
             // Osx
             // 
@@ -309,7 +316,8 @@
             this.Osx.Name = "Osx";
             this.Osx.Size = new System.Drawing.Size(100, 20);
             this.Osx.TabIndex = 32;
-            this.Osx.Text = "Os X";
+            this.Osx.Text = "X";
+            this.Osx.TextChanged += new System.EventHandler(this.Osx_TextChanged);
             // 
             // groupBox2
             // 
@@ -621,13 +629,57 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Joint";
             // 
-            // richTextBoxRead
+            // tabPage1
             // 
-            this.richTextBoxRead.Location = new System.Drawing.Point(17, 103);
-            this.richTextBoxRead.Name = "richTextBoxRead";
-            this.richTextBoxRead.Size = new System.Drawing.Size(267, 157);
-            this.richTextBoxRead.TabIndex = 2;
-            this.richTextBoxRead.Text = "";
+            this.tabPage1.Controls.Add(this.stopButton);
+            this.tabPage1.Controls.Add(this.runButton);
+            this.tabPage1.Controls.Add(this.uploadButton);
+            this.tabPage1.Controls.Add(this.richTextBoxProgram);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(596, 329);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Auto";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxProgram
+            // 
+            this.richTextBoxProgram.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxProgram.Name = "richTextBoxProgram";
+            this.richTextBoxProgram.Size = new System.Drawing.Size(403, 315);
+            this.richTextBoxProgram.TabIndex = 0;
+            this.richTextBoxProgram.Text = "";
+            // 
+            // uploadButton
+            // 
+            this.uploadButton.Location = new System.Drawing.Point(424, 55);
+            this.uploadButton.Name = "uploadButton";
+            this.uploadButton.Size = new System.Drawing.Size(164, 52);
+            this.uploadButton.TabIndex = 1;
+            this.uploadButton.Text = "Upload Program";
+            this.uploadButton.UseVisualStyleBackColor = true;
+            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
+            // 
+            // runButton
+            // 
+            this.runButton.Location = new System.Drawing.Point(466, 111);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(72, 55);
+            this.runButton.TabIndex = 3;
+            this.runButton.Text = "Run Program";
+            this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(466, 172);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(72, 55);
+            this.stopButton.TabIndex = 4;
+            this.stopButton.Text = "Stop Program";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // Form1
             // 
@@ -646,7 +698,6 @@
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -655,6 +706,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -708,10 +760,14 @@
         private System.Windows.Forms.Button Con_btn;
         private System.Windows.Forms.TabPage tabPage4;
         public static System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.RichTextBox richTextBoxRead;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button uploadButton;
+        private System.Windows.Forms.RichTextBox richTextBoxProgram;
+        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Button stopButton;
     }
 }
 

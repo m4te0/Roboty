@@ -20,8 +20,8 @@ namespace Projekt
             {
                 comboBoxPorts.Items.Add(port);
             }
-            manipulator = File.Exists("SerialSettings.json") ? 
-                new E3JManipulator(DriverSettings.CreateFromSettingFile()) : 
+            manipulator = File.Exists("SerialSettings.json") ?
+                new E3JManipulator(DriverSettings.CreateFromSettingFile()) :
                 new E3JManipulator(DriverSettings.CreateDefaultSettings());
             manipulator.Port.DataReceived += Port_DataReceived;
             manipulator.Port.ConnectionStatusChanged += Port_ConnectionStatusChanged;
@@ -31,7 +31,7 @@ namespace Projekt
         {
             if (e.OldStatus && !e.NewStatus)
             {
-               // obsłużyć rozłączenie  
+                // obsłużyć rozłączenie  
             }
         }
 
@@ -43,14 +43,15 @@ namespace Projekt
         private async void SendProgram()
         {
             var programService = new ProgramService(manipulator);
-            var program = new Driver.Program("Dupa")
+            var program = new Driver.Program("test")
             {
                 Content = richTextBoxRead.Text
-                
+
             };
             await programService.UploadProgram(program);
             var programs = await programService.ReadProgramInfo();
-            var program = await programService.DownloadProgram(programs[0]);
+            var programa = await programService.DownloadProgram(programs[0]);
+            richTextBoxRead.Text = programa.Content;
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -201,7 +202,7 @@ namespace Projekt
             if (string.IsNullOrWhiteSpace(comboBoxPorts.Text))
             {
                 //manipulator.Connect(comboBoxPorts.Text); // połączenia z manipulatorem 
-                
+
                 pictureBox1.Image = Resources.green; // zczytanie obraka
                 manipulator.Settings.PortName = "COM1";
                 manipulator.Settings.SaveToFile();
@@ -209,7 +210,7 @@ namespace Projekt
             else
             {
                 MessageBox.Show("Invalid port");
-            }    
+            }
         }
 
         private void button9_Click_1(object sender, EventArgs e) // obróć chwytak prawo/lewo
@@ -332,5 +333,37 @@ namespace Projekt
         {
 
         }
+
+        private void richTextBoxRead_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uploadButton_Click(object sender, EventArgs e)
+        {
+
+            var programService = new ProgramService(manipulator);
+            var program = new Driver.Program("test");
+            program.Content = richTextBoxProgram.Text;          
+         }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            var program = new Driver.RemoteProgram("test",2,"");
+            var programService = new ProgramService(manipulator);
+            programService.RunProgram(program);
+
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            var programService = new ProgramService(manipulator);
+            programService.StopProgram();
+        }
+
+        private void Osx_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-}
+    }
