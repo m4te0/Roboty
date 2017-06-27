@@ -349,9 +349,11 @@ namespace Projekt
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            var program = new Driver.RemoteProgram("test",2,"");
+            
             var programService = new ProgramService(manipulator);
-            programService.RunProgram(program);
+            var programs =  programService.ReadProgramInfo();
+            var programa = programService.DownloadProgram(programs[0]);
+            programService.RunProgram.programa;
 
         }
 
